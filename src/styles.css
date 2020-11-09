@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+.radio {
+  margin-top: 20px;
+  margin-left: 50px
+}
+
+.parti {
+  background-color: firebrick !important;
+  color: white!important;
+}

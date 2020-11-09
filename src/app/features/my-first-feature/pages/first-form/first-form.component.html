@@ -1,0 +1,95 @@
+<form [formGroup]="empForm" (ngSubmit)="submit()">
+  <p-panel header="Ajout d'un employée">
+
+    <div class="p-fluid p-formgrid p-grid">
+      <div class="p-field p-col-4">
+        <label for="nom">Nom</label>
+        <input #nom
+               type="text"
+               id="nom"
+               pInputText
+               formControlName="nom"
+               [ngClass]="{'p-invalid': empForm.get('nom').errors && (empForm.get('nom').dirty || empForm.get('nom').touched)}"
+               (input)="empForm.get('nom').setValue(nom.value.toUpperCase())">
+        <div class="p-invalid" *ngIf="empForm.get('nom').errors?.required
+        && (empForm.get('nom').dirty || empForm.get('nom').touched)">
+          <small class="p-mb-3 p-text-italic">Veuillez renseigner un nom</small>
+        </div>
+      </div>
+      <div class="p-field p-col-4">
+        <label for="prenom">Prénom</label>
+        <input
+          #prenom
+          type="text"
+          id="prenom"
+          pInputText
+          formControlName="prenom"
+          [ngClass]="{'p-invalid': empForm.get('prenom').errors &&
+          (empForm.get('prenom').dirty || empForm.get('prenom').touched)}"
+          (input)="empForm.get('prenom').setValue(setTitleCase(prenom.value))">
+        <div class="p-invalid" *ngIf="empForm.get('prenom').errors?.required
+        && (empForm.get('prenom').dirty || empForm.get('prenom').touched)" >
+          <small class="p-mb-3 p-text-italic">Veuillez renseigner un prénom</small>
+        </div>
+      </div>
+      <div class="p-field p-col-4">
+        <label for="fct">Fonction</label>
+        <p-dropdown id="fct"
+                    [options]="fonctionList"
+                    optionLabel="libelle"
+                    formControlName="fonction"
+                    [ngClass]="{'p-invalid': empForm.get('fonction').errors && (empForm.get('fonction').dirty
+                    || empForm.get('fonction').touched)}"
+                    placeholder="Choisissez une fonction">
+        </p-dropdown>
+        <div class="p-invalid" *ngIf="empForm.get('fonction').errors?.required
+        && (empForm.get('fonction').dirty || empForm.get('fonction').touched)">
+          <small class="p-mb-3 p-text-italic">Veuillez choisir une fonction</small>
+        </div>
+      </div>
+    </div>
+    <div class="p-fluid p-formgrid p-grid">
+      <div class="p-field p-col-4">
+        <label for="date">Date d'arrivée</label>
+        <p-calendar id="date"
+                    [showIcon]="true"
+                    appendTo="body"
+                    dateFormat="dd-mm-yy"
+                    [monthNavigator]="true"
+                    [ngClass]="{'p-invalid': empForm.get('dateArrivee').errors
+        && (empForm.get('dateArrivee').dirty || empForm.get('dateArrivee').touched)}"
+                    [yearNavigator]="true"
+                    formControlName="dateArrivee" [yearRange]="'2000:2020'">
+        </p-calendar>
+        <div class="p-invalid" *ngIf="empForm.get('dateArrivee').errors?.required
+        && (empForm.get('dateArrivee').dirty || empForm.get('dateArrivee').touched)">
+          <small class="p-mb-3 p-text-italic">Veuillez renseigner une date d'arrivée</small>
+        </div>
+      </div>
+
+      <div class="p-field p-col-4">
+        Sexe
+        <div class="p-mx-auto" style="display: flex">
+          <p-radioButton class="p-mr-2 p-mb-2 radio" label="Homme" name="sexe" value="M" [ngClass]="{'p-invalid': empForm.get('sexe').errors
+        && (empForm.get('sexe').dirty || empForm.get('sexe').touched)}"
+                         formControlName="sexe"></p-radioButton>
+          <p-radioButton class="p-mr-2 p-mb-2 radio" label="Femme" name="sexe" value="F" [ngClass]="{'p-invalid': empForm.get('sexe').errors
+        && (empForm.get('sexe').dirty || empForm.get('sexe').touched)}"
+                         formControlName="sexe"></p-radioButton>
+        </div>
+        <div class="p-invalid" *ngIf="empForm.get('sexe').errors?.required
+        && (empForm.get('sexe').dirty || empForm.get('sexe').touched)">
+          <small class="p-mb-3 p-text-italic">Veuillez renseigner un sexe</small>
+        </div>
+      </div>
+      <div class="p-field p-col-4">
+
+      </div>
+    </div>
+    <p-footer>
+      <button pButton label="Enregistrer" type="submit"></button>
+    </p-footer>
+
+  </p-panel>
+</form>
+
